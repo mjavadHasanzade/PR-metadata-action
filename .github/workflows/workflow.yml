@@ -21,7 +21,7 @@ jobs:
 
       - name: "Deploy"
         run: |
-          yes y | pip install fandogh_cli --upgrade
+          yes y | pip install fandogh_cli --upgrade -y
           fandogh login --username ${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }}
           fandogh namespace active --name mjavad
           fandogh source run
