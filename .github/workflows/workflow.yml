@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-  - name: "Build"
+    name: "Build"
       runs-on: ubuntu-latest
       strategy:
         matrix:
@@ -18,13 +18,12 @@ jobs:
         - uses: actions/checkout@v1
         - run: npm install
         - run: npm run build
-
-  - name: "Deploy"
-  - uses: actions/setup-python@v2
-  - uses: jannekem/run-python-script-action@v1
-  run: |
-    pip install fandogh_cli --upgrade
-    fandogh login --username ${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }}
-    fandogh namespace active --name mjavad
-    fandogh source run
+        - name: "Deploy"
+        - uses: actions/setup-python@v2
+        - uses: jannekem/run-python-script-action@v1
+        run: |
+          pip install fandogh_cli --upgrade
+          fandogh login --username ${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }}
+          fandogh namespace active --name mjavad
+          fandogh source run
 
