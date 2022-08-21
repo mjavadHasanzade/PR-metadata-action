@@ -9,15 +9,15 @@ on:
 jobs:
   build:
   - name: "Build"
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [15.x]
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [15.x]
 
-    steps:
-      - uses: actions/checkout@v1
-      - run: npm install
-      - run: npm run build
+      steps:
+        - uses: actions/checkout@v1
+        - run: npm install
+        - run: npm run build
 
   - name: "Deploy"
   - uses: actions/setup-python@v2
