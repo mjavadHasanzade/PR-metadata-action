@@ -2,7 +2,7 @@ name: React CI
 
 on:
   workflow_dispatch:
-  
+
   repository_dispatch:
     types: [workflow]
 
@@ -19,6 +19,10 @@ jobs:
       - run: npm run build
       - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
-      - run: |
-        echo "mjavad"
 
+      - name: "Deploy"
+        run: |
+          pip install fandogh_cli --upgrade
+          fandogh login --username ${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }}
+          fandogh namespace active --name mjavad
+          fandogh source run
