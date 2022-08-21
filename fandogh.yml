@@ -1,0 +1,8 @@
+kind: ExternalService
+name: fandact
+spec:
+  image_pull_policy: Always
+  port: 80
+  source:
+    context: ./public
+    project_type: static_website
