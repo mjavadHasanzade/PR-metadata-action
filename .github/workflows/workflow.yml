@@ -8,7 +8,7 @@ on:
 
   repository_dispatch:
     types:
-      - webhook
+      - workflow
 
 jobs:
   build:
