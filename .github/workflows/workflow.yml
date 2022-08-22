@@ -6,6 +6,9 @@ on:
   repository_dispatch:
     types: [workflow]
 
+env:
+  PYTHON_VERSION: 3.9
+
 jobs:
   build:
     name: "Build"
@@ -17,8 +20,17 @@ jobs:
       - uses: actions/checkout@v1
       - run: npm install
       - run: npm run build
-      - uses: actions/setup-python@v2
-
+      
+  py-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Environment Information
+        run: npx envinfo
       - name: "Deploy"
         run: |
           COLLECT_ERROR=True pip install fandogh_cli --upgrade
